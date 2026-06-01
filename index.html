@@ -1,631 +1,1224 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Treino Hipertrofia Iniciante - 3x Semana</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Treino Hipertrofia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #0f1115;
-      --card: #181b22;
-      --card2: #20242d;
-      --text: #f4f4f5;
-      --muted: #a1a1aa;
-      --accent: #22c55e;
-      --accent-hover: #16a34a;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-      --border: #2f3542;
+      --bg: #080a0e;
+      --surface: #0f1318;
+      --card: #141820;
+      --card2: #1a1f2a;
+      --border: rgba(255,255,255,0.07);
+      --text: #eef0f4;
+      --muted: #6b7280;
+      --accent: #00e5a0;
+      --accent-dim: rgba(0,229,160,0.12);
+      --accent-glow: rgba(0,229,160,0.25);
+      --red: #ff4757;
+      --red-dim: rgba(255,71,87,0.12);
+      --yellow: #ffd32a;
+      --yellow-dim: rgba(255,211,42,0.1);
+      --blue: #5352ed;
+      --blue-dim: rgba(83,82,237,0.15);
+
+      --day-a: #00e5a0;
+      --day-b: #5352ed;
+      --day-c: #ff6b81;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'DM Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      padding-bottom: 140px; /* Mais espaço para não cobrir o conteúdo com as barras fixas */
+      min-height: 100vh;
+      padding-bottom: 90px;
+      overflow-x: hidden;
     }
 
+    /* ── HEADER ── */
     header {
-      padding: 24px 16px;
-      background: linear-gradient(135deg, #111827, #1f2937);
+      position: relative;
+      padding: 40px 20px 32px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #0d1117 0%, #101520 100%);
       border-bottom: 1px solid var(--border);
     }
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: 24px;
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,160,0.12) 0%, transparent 65%);
+      pointer-events: none;
     }
 
-    h2 {
-      font-size: 20px;
-      margin-top: 28px;
-      border-left: 4px solid var(--accent);
-      padding-left: 10px;
-      margin-bottom: 16px;
+    .header-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
     }
 
-    .container {
-      max-width: 950px;
-      margin: auto;
-      padding: 16px;
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 8vw, 56px);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff 40%, #a0a8b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .chip-green { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(0,229,160,0.25); }
+    .chip-gray  { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+    /* ── CONTAINER ── */
+    .wrap { max-width: 700px; margin: auto; padding: 20px 16px; }
+
+    /* ── SECTION TITLE ── */
+    .sec-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1.5px;
+      margin: 32px 0 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── CARDS ── */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .info {
-      background: var(--card2);
-      border-radius: 12px;
-      padding: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .muted {
-      color: var(--muted);
+      border-radius: 16px;
+      padding: 18px;
       margin-bottom: 12px;
     }
 
-    .badge-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    .card-accent-green { border-color: rgba(0,229,160,0.2); }
+    .card-accent-red   { border-color: rgba(255,71,87,0.2); background: var(--red-dim); }
+    .card-accent-yellow{ border-color: rgba(255,211,42,0.2); background: var(--yellow-dim); }
+
+    /* ── DAY SELECTOR ── */
+    .day-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: #064e3b;
-      color: #bbf7d0;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .warning {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid var(--warning);
-      color: #fde68a;
-    }
-
-    .danger {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid var(--danger);
-      color: #fecaca;
-    }
-
-    ul, ol {
-      margin-left: 20px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-
-    li {
-      margin-bottom: 6px;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin: 6px 0;
-      background: var(--card2);
-      color: var(--text);
+    .day-tab {
+      position: relative;
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 16px;
+      border-radius: 14px;
+      padding: 14px 10px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      text-align: center;
+      transition: all .25s;
+      overflow: hidden;
     }
 
-    button:hover {
-      background: #2a2f3a;
+    .day-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 0 0 14px 14px;
+      opacity: 0;
+      transition: opacity .25s;
     }
 
-    button.active {
-      background: var(--accent);
-      color: #052e16;
-      font-weight: bold;
+    .day-tab.seg::after { background: var(--day-a); }
+    .day-tab.qua::after { background: var(--day-b); }
+    .day-tab.sex::after { background: var(--day-c); }
+
+    .day-tab.active::after { opacity: 1; }
+
+    .day-tab.active.seg { border-color: rgba(0,229,160,0.35); background: rgba(0,229,160,0.06); }
+    .day-tab.active.qua { border-color: rgba(83,82,237,0.35); background: rgba(83,82,237,0.08); }
+    .day-tab.active.sex { border-color: rgba(255,107,129,0.35); background: rgba(255,107,129,0.07); }
+
+    .day-tab:hover { transform: translateY(-2px); }
+
+    .day-tab .day-icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .day-tab .day-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .day-tab.seg .day-name { color: var(--day-a); }
+    .day-tab.qua .day-name { color: var(--day-b); }
+    .day-tab.sex .day-name { color: var(--day-c); }
+
+    .day-tab .day-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── WORKOUT PANEL ── */
+    .workout-panel { display: none; }
+    .workout-panel.active { display: block; animation: fadeIn .3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 16px;
+      border-radius: 14px;
+    }
+
+    .panel-header.seg { background: rgba(0,229,160,0.07); border: 1px solid rgba(0,229,160,0.15); }
+    .panel-header.qua { background: rgba(83,82,237,0.08); border: 1px solid rgba(83,82,237,0.2); }
+    .panel-header.sex { background: rgba(255,107,129,0.07); border: 1px solid rgba(255,107,129,0.15); }
+
+    .panel-icon { font-size: 28px; }
+
+    .panel-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1.5px;
+    }
+
+    .panel-header.seg .panel-title { color: var(--day-a); }
+    .panel-header.qua .panel-title { color: var(--day-b); }
+    .panel-header.sex .panel-title { color: var(--day-c); }
+
+    .panel-sub { font-size: 13px; color: var(--muted); }
+
+    /* ── EXERCISE CARD ── */
+    .exercise-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+
+    .exercise-card.checked {
+      opacity: 0.45;
       border-color: var(--accent);
     }
 
-    .tab-content {
+    .ex-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .ex-check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all .2s;
+      font-size: 11px;
+      color: transparent;
+    }
+
+    .exercise-card.checked .ex-check {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    .ex-name {
+      flex: 1;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .exercise-card.checked .ex-name { text-decoration: line-through; color: var(--muted); }
+
+    .ex-expand {
+      color: var(--muted);
+      font-size: 18px;
+      transition: transform .25s;
+    }
+
+    .exercise-card.open .ex-expand { transform: rotate(180deg); }
+
+    .ex-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 0 16px 4px 50px;
+    }
+
+    .ex-badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 99px;
+      font-weight: 500;
+    }
+
+    .badge-green { background: var(--accent-dim); color: var(--accent); }
+    .badge-blue  { background: var(--blue-dim);  color: #a29bfe; }
+    .badge-gray  { background: rgba(255,255,255,0.05); color: var(--muted); }
+
+    .ex-body {
       display: none;
-      animation: fadeIn 0.3s ease;
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--border);
+      animation: slideDown .2s ease;
     }
 
-    .tab-content.active {
-      display: block;
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
+    .exercise-card.open .ex-body { display: block; }
+
+    .ex-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
-    details {
+    .ex-stat {
+      background: var(--card2);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .ex-stat .val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      color: var(--accent);
+    }
+
+    .ex-stat .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    .ex-tip {
+      background: var(--card2);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+      line-height: 1.5;
+    }
+
+    /* ── TIMER ── */
+    .timer-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    #timer-display {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      line-height: 1;
+      color: var(--accent);
+      text-shadow: 0 0 30px var(--accent-glow);
+      transition: color .3s;
+      margin-bottom: 16px;
+    }
+
+    #timer-display.urgent { color: var(--red); text-shadow: 0 0 30px rgba(255,71,87,0.4); }
+    #timer-display.done   { color: #fff; text-shadow: none; }
+
+    .timer-progress {
+      height: 3px;
+      background: var(--border);
+      border-radius: 99px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .timer-bar {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      width: 100%;
+      transition: width 1s linear, background .3s;
+    }
+
+    .timer-bar.urgent { background: var(--red); }
+
+    .timer-btns {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .timer-btn {
+      padding: 10px 6px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .timer-btn:hover { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+    .timer-btn.running { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+    /* ── PROGRESS TRACKER ── */
+    .progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .progress-count {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: var(--accent);
+    }
+
+    .progress-bar-wrap {
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width .4s ease;
+    }
+
+    /* ── INFO GRID ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+    }
+
+    .info-block {
       background: var(--card2);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px;
-      margin-bottom: 10px;
-      transition: all 0.3s ease;
     }
 
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 16px;
+    .info-block .ib-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+    .info-block .ib-val   { font-weight: 600; font-size: 15px; }
+
+    /* ── CHECKLIST ── */
+    .checklist-item {
       display: flex;
       align-items: center;
-      user-select: none;
-    }
-
-    details p {
-      margin-top: 8px;
-      font-size: 14px;
-      color: #d4d4d8;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      overflow-x: auto;
-    }
-
-    th, td {
-      border: 1px solid var(--border);
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
-      font-size: 14px;
-    }
-
-    th {
-      background: var(--card2);
-      color: var(--accent);
-    }
-
-    input[type="checkbox"] {
-      transform: scale(1.4);
-      margin-right: 12px;
-      cursor: pointer;
-      accent-color: var(--accent);
-    }
-
-    .exercise {
-      border-left: 4px solid var(--accent);
-    }
-
-    .exercise.done {
-      opacity: 0.5;
-      border-left-color: var(--muted);
-    }
-
-    .exercise.done summary {
-      text-decoration: line-through;
-      color: var(--muted);
-    }
-
-    .fixed-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #09090b;
-      border-top: 1px solid var(--border);
-      padding: 8px 12px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      z-index: 10;
-    }
-
-    .fixed-nav button {
-      font-size: 14px;
-      padding: 12px 0;
-      margin: 0;
-      border-radius: 8px;
-    }
-
-    /* Floating Timer Bar */
-    .floating-timer {
-      position: fixed;
-      bottom: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 32px);
-      max-width: 918px;
-      background: #1e293b;
-      border: 2px solid var(--accent);
-      border-radius: 12px;
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-      z-index: 1000;
-      display: none;
-    }
-
-    .timer-text {
-      font-size: 28px;
-      font-weight: bold;
-      color: var(--accent);
-      font-family: monospace;
-    }
-
-    .timer-controls {
-      display: flex;
       gap: 10px;
-    }
-
-    .timer-controls button {
-      margin: 0;
-      padding: 8px 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
       font-size: 14px;
-      width: auto;
+      transition: color .2s;
     }
 
-    .timer-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+    .checklist-item:last-child { border-bottom: none; }
+
+    .checklist-item input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
     }
+
+    .checklist-item.done-item { color: var(--muted); text-decoration: line-through; }
+
+    /* ── TABLE ── */
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid var(--border); padding: 10px 12px; font-size: 13px; text-align: left; }
+    th { background: var(--card2); color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(8,10,14,0.95);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      padding: 10px 16px 14px;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      padding: 10px 6px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all .2s;
+    }
+
+    .nav-btn.active-seg { background: var(--accent-dim); border-color: rgba(0,229,160,0.3); color: var(--accent); }
+    .nav-btn.active-qua { background: var(--blue-dim);   border-color: rgba(83,82,237,0.3); color: #a29bfe; }
+    .nav-btn.active-sex { background: rgba(255,107,129,0.08); border-color: rgba(255,107,129,0.3); color: var(--day-c); }
+
+    details summary { list-style: none; cursor: pointer; }
+    details summary::-webkit-details-marker { display: none; }
+
+    .details-wrap {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .details-wrap summary {
+      padding: 14px;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .details-wrap summary::after { content: '▾'; color: var(--muted); transition: transform .2s; }
+    .details-wrap[open] summary::after { transform: rotate(180deg); }
+
+    .details-wrap > div { padding: 0 14px 14px; font-size: 14px; line-height: 1.7; color: var(--muted); }
+
+    .week-phases { display: flex; flex-direction: column; gap: 8px; }
+
+    .phase-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--card2);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .phase-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .phase-1 { background: rgba(0,229,160,0.15); color: var(--accent); }
+    .phase-2 { background: rgba(255,211,42,0.15); color: var(--yellow); }
+    .phase-3 { background: rgba(255,71,87,0.15);  color: var(--red); }
+
+    .phase-text .pt { font-weight: 600; font-size: 14px; }
+    .phase-text .ps { font-size: 12px; color: var(--muted); }
+
+    ul { padding-left: 18px; }
+    ul li { margin-bottom: 6px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+    ul li strong { color: var(--text); }
   </style>
 </head>
-
 <body>
 
 <header>
-  <h1>Programa de Hipertrofia — Iniciante</h1>
-  <p class="muted">
-    Homem, 16 anos, 60 kg, 1,80 m, academia completa, 3x por semana (Seg, Qua e Sex).
-  </p>
-  <div class="badge-container">
-    <span class="badge">Ganho de Massa</span>
-    <span class="badge" style="background: #7f1d1d; color: #fca5a5;">Sem Cardio</span>
-    <span class="badge">Full Body</span>
-    <span class="badge" style="background: #1e3a8a; color: #bfdbfe;">RIR 2–3</span>
+  <div class="header-label">PROGRAMA PERSONALIZADO</div>
+  <h1>HIPERTROFIA<br>MÁXIMA</h1>
+  <div class="header-meta">
+    <span class="chip chip-green">16 anos · 60 kg · 1,80 m</span>
+    <span class="chip chip-gray">Iniciante</span>
+    <span class="chip chip-gray">3× semana</span>
+    <span class="chip chip-gray">RIR 2–3</span>
   </div>
 </header>
 
-<div class="container">
+<div class="wrap">
 
-  <section class="card warning">
-    <h2>⚠️ Antes de começar</h2>
-    <p>
-      Como você tem 16 anos e é iniciante, o foco é aprender a executar os movimentos com técnica perfeita, sem buscar cargas máximas. Treine com supervisão sempre que possível.
-    </p><br>
-    <p>
-      <strong>Regra principal:</strong> nenhuma série deve ir até a falha. Termine cada série sentindo que ainda conseguiria fazer <strong>2 a 3 repetições boas</strong>.
-    </p>
-  </section>
+  <!-- SELETOR DE DIA -->
+  <p class="sec-title">Treino do dia</p>
 
-  <section class="card">
-    <h2>Escolha o treino do dia</h2>
-    <button onclick="showTab('segunda')" id="btn-top-segunda" class="active">Segunda — Full Body A</button>
-    <button onclick="showTab('quarta')" id="btn-top-quarta">Quarta — Full Body B</button>
-    <button onclick="showTab('sexta')" id="btn-top-sexta">Sexta — Full Body C</button>
-  </section>
-
-  <section id="segunda" class="tab-content active card">
-    <h2>Segunda — Full Body A</h2>
-
-    <div class="exercise-list">
-      <details class="exercise" open>
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Leg Press 45°</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><strong>Cadência:</strong> 3s descendo / 1s subindo</p>
-        <p><strong>RIR:</strong> 2–3</p>
-        <p><em>Dica:</em> Pés na largura dos ombros, desça controlando e não tire o quadril do banco.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Supino Máquina</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><strong>Cadência:</strong> 2–3s descendo / 1s subindo</p>
-        <p><strong>RIR:</strong> 2–3</p>
-        <p><em>Dica:</em> Mantenha as escápulas levemente encaixadas e não deixe os ombros subirem.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Puxada Frontal na Polia</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><strong>Cadência:</strong> 2s puxando / 3s voltando</p>
-        <p><strong>RIR:</strong> 2–3</p>
-        <p><em>Dica:</em> Puxe a barra até a parte alta do peito, sem jogar o tronco para trás.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Cadeira Flexora</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Reps:</strong> 12–15</p>
-        <p><strong>Descanso:</strong> 60–75 segundos</p>
-        <p><strong>Cadência:</strong> 2s contraindo / 3s voltando</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Elevação Lateral com Halteres</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Reps:</strong> 12–15</p>
-        <p><strong>Descanso:</strong> 60 segundos</p>
-        <p><strong>Cadência:</strong> Controlada, sem balanço</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Prancha Abdominal</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Tempo:</strong> 20–40 segundos</p>
-        <p><strong>Descanso:</strong> 60 segundos</p>
-        <p><em>Dica:</em> Mantenha o abdômen contraído e a lombar neutra.</p>
-      </details>
+  <div class="day-tabs">
+    <div class="day-tab seg active" onclick="switchDay('seg')">
+      <div class="day-icon">💪</div>
+      <div class="day-name">Segunda</div>
+      <div class="day-sub">Peito + Tríceps</div>
     </div>
-  </section>
-
-  <section id="quarta" class="tab-content card">
-    <h2>Quarta — Full Body B</h2>
-
-    <div class="exercise-list">
-      <details class="exercise" open>
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Agachamento Goblet com Halter</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><strong>Cadência:</strong> 3s descendo / 1s subindo</p>
-        <p><em>Dica:</em> Segure o halter no peito, desça com controle e mantenha o tronco firme.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Remada Baixa Máquina ou Polia</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><em>Dica:</em> Puxe com os cotovelos, não com as mãos.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Desenvolvimento de Ombros Máquina</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><em>Dica:</em> Não trave os cotovelos no topo do movimento.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Cadeira Extensora</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Reps:</strong> 12–15</p>
-        <p><strong>Descanso:</strong> 60–75 segundos</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Rosca Direta com Barra W</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 60 segundos</p>
-        <p><em>Dica:</em> Cotovelos colados ao corpo, sem balançar a lombar.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Abdominal Máquina ou Crunch</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Reps:</strong> 12–15</p>
-        <p><strong>Descanso:</strong> 60 segundos</p>
-      </details>
+    <div class="day-tab qua" onclick="switchDay('qua')">
+      <div class="day-icon">🦵</div>
+      <div class="day-name">Quarta</div>
+      <div class="day-sub">Pernas + Glúteos</div>
     </div>
-  </section>
-
-  <section id="sexta" class="tab-content card">
-    <h2>Sexta — Full Body C</h2>
-
-    <div class="exercise-list">
-      <details class="exercise" open>
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Hack Machine ou Smith</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><em>Dica:</em> Escolha o aparelho em que você se sentir mais estável.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Supino Inclinado com Halteres</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><em>Dica:</em> Use carga leve no começo para aprender a controlar os halteres.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Remada Máquina com Apoio</summary>
-        <p><strong>Séries:</strong> 3 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 90 segundos</p>
-        <p><em>Dica:</em> Mantenha o peito apoiado no banco e evite puxar com impulso.</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Mesa ou Cadeira Flexora</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Reps:</strong> 12–15</p>
-        <p><strong>Descanso:</strong> 60–75 segundos</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Tríceps na Polia com Corda</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Reps:</strong> 10–12</p>
-        <p><strong>Descanso:</strong> 60 segundos</p>
-      </details>
-
-      <details class="exercise">
-        <summary><input type="checkbox" onchange="toggleDone(this)"> Panturrilha Sentado ou em Pé</summary>
-        <p><strong>Séries:</strong> 2 | <strong>Reps:</strong> 12–15</p>
-        <p><strong>Descanso:</strong> 60 segundos</p>
-        <p><em>Dica:</em> Faça amplitude completa, alongando bem no final e sem quicar.</p>
-      </details>
+    <div class="day-tab sex" onclick="switchDay('sex')">
+      <div class="day-icon">🔝</div>
+      <div class="day-name">Sexta</div>
+      <div class="day-sub">Costas + Bíceps</div>
     </div>
-  </section>
+  </div>
 
-  <section class="card">
-    <h2>Cronômetro de Descanso</h2>
-    <p class="muted">Inicie seu tempo após cada série.</p>
-    <div class="timer-grid">
-      <button onclick="startTimer(60)">⏱️ 60s</button>
-      <button onclick="startTimer(75)">⏱️ 75s</button>
-      <button onclick="startTimer(90)">⏱️ 90s</button>
-      <button onclick="startTimer(120)">⏱️ 120s</button>
+  <!-- ═══ SEGUNDA ═══ -->
+  <div class="workout-panel active" id="panel-seg">
+    <div class="panel-header seg">
+      <div class="panel-icon">💪</div>
+      <div>
+        <div class="panel-title">PEITO + TRÍCEPS + OMBRO</div>
+        <div class="panel-sub">Segunda-feira · 5 exercícios · ~55 min</div>
+      </div>
     </div>
-  </section>
 
-  <section class="card">
-    <h2>Checklist Diário</h2>
-    <label style="display:flex; align-items:center; margin-bottom:10px;"><input type="checkbox"> Fiz mobilidade articular</label>
-    <label style="display:flex; align-items:center; margin-bottom:10px;"><input type="checkbox"> Fiz séries de aquecimento</label>
-    <label style="display:flex; align-items:center; margin-bottom:10px;"><input type="checkbox"> Mantive RIR 2–3 (Não falhei)</label>
-    <label style="display:flex; align-items:center; margin-bottom:10px;"><input type="checkbox"> Controlei a descida do peso</label>
-    <label style="display:flex; align-items:center; margin-bottom:10px;"><input type="checkbox"> Não fiz cardio</label>
-  </section>
-
-  <section class="card">
-    <h2>Como escolher a carga</h2>
-    <p>Escolha uma carga com a qual você consiga fazer todas as repetições com técnica boa, terminando a série com <strong>2 a 3 repetições na reserva</strong>.</p>
-    <br>
-    <div class="grid">
-      <div class="info"><strong>Carga leve demais:</strong><br>Sente que faria mais de 5 reps.</div>
-      <div class="info"><strong>Carga ideal:</strong><br>Sente que faria só mais 2 ou 3 reps.</div>
-      <div class="info"><strong>Carga pesada demais:</strong><br>Você rouba, perde postura ou falha antes do alvo.</div>
+    <div class="progress-header">
+      <span style="font-size:13px;color:var(--muted)">Progresso do treino</span>
+      <span class="progress-count" id="prog-seg">0 / 5</span>
     </div>
-  </section>
+    <div class="progress-bar-wrap" style="margin-bottom:16px">
+      <div class="progress-bar-fill" id="bar-seg" style="width:0%"></div>
+    </div>
 
-  <section class="card">
-    <h2>Regras de Execução</h2>
+    <div id="exercises-seg">
+
+      <div class="exercise-card" data-day="seg">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Supino Máquina</div>
+          <div class="ex-meta" style="padding:0">
+            <span class="ex-badge badge-green">3×10–12</span>
+          </div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">10–12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">90s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Escápulas encaixadas, não deixe os ombros subirem. Desça 3 segundos, suba 1 segundo.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="seg">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Crucifixo na Polia (cross-over)</div>
+          <div class="ex-meta" style="padding:0">
+            <span class="ex-badge badge-green">3×12–15</span>
+          </div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">12–15</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">75s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Cotovelos levemente dobrados durante todo o movimento. Sinta o alongamento no peito na abertura.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="seg">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Desenvolvimento de Ombros Máquina</div>
+          <div class="ex-meta" style="padding:0">
+            <span class="ex-badge badge-green">3×10–12</span>
+          </div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">10–12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">90s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Não trave os cotovelos no topo. Desça controlando os 3 segundos.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="seg">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Tríceps na Polia (corda)</div>
+          <div class="ex-meta" style="padding:0">
+            <span class="ex-badge badge-green">3×12–15</span>
+          </div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">12–15</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">60s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Cotovelos fixos ao lado do corpo. Abra a corda no final do movimento para contrair o tríceps.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="seg">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Elevação Lateral com Halteres</div>
+          <div class="ex-meta" style="padding:0">
+            <span class="ex-badge badge-green">3×15</span>
+          </div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">15</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">60s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Sem balançar o tronco. Movimentos controlados, cotovelos levemente dobrados.</div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /panel-seg -->
+
+  <!-- ═══ QUARTA ═══ -->
+  <div class="workout-panel" id="panel-qua">
+    <div class="panel-header qua">
+      <div class="panel-icon">🦵</div>
+      <div>
+        <div class="panel-title">PERNAS + GLÚTEOS + PANTURRILHA</div>
+        <div class="panel-sub">Quarta-feira · 6 exercícios · ~60 min</div>
+      </div>
+    </div>
+
+    <div class="progress-header">
+      <span style="font-size:13px;color:var(--muted)">Progresso do treino</span>
+      <span class="progress-count" id="prog-qua">0 / 6</span>
+    </div>
+    <div class="progress-bar-wrap" style="margin-bottom:16px">
+      <div class="progress-bar-fill" id="bar-qua" style="width:0%"></div>
+    </div>
+
+    <div id="exercises-qua">
+
+      <div class="exercise-card" data-day="qua">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Leg Press 45°</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge badge-blue">4×10–12</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">4</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">10–12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">90s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Pés na largura dos ombros. Desça até 90° sem tirar o quadril do banco. Cadência 3s descendo.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="qua">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Agachamento Goblet com Halter</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge badge-blue">3×12</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">90s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Halter no peito. Tronco firme, joelhos na direção dos pés, amplitude completa.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="qua">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Cadeira Extensora</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge badge-blue">3×12–15</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">12–15</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">75s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Suba 2s, desça 3s. Não jogue a perna — controle sempre.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="qua">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Cadeira Flexora</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge badge-blue">3×12–15</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">12–15</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">75s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Contraia no pico por 1 segundo antes de voltar. Não deixe cair o peso.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="qua">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Stiff com Halteres</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge badge-blue">3×10–12</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">10–12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">90s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Costas retas, desça até sentir o alongamento no posterior. Não arredonde a lombar.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="qua">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Panturrilha em Pé (máquina ou step)</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge badge-blue">3×15</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">15</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">60s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Amplitude completa — desce o calcanhar abaixo da plataforma. Sem quicar.</div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /panel-qua -->
+
+  <!-- ═══ SEXTA ═══ -->
+  <div class="workout-panel" id="panel-sex">
+    <div class="panel-header sex">
+      <div class="panel-icon">🔝</div>
+      <div>
+        <div class="panel-title">COSTAS + BÍCEPS + ABDOME</div>
+        <div class="panel-sub">Sexta-feira · 6 exercícios · ~55 min</div>
+      </div>
+    </div>
+
+    <div class="progress-header">
+      <span style="font-size:13px;color:var(--muted)">Progresso do treino</span>
+      <span class="progress-count" id="prog-sex">0 / 6</span>
+    </div>
+    <div class="progress-bar-wrap" style="margin-bottom:16px">
+      <div class="progress-bar-fill" id="bar-sex" style="width:0%"></div>
+    </div>
+
+    <div id="exercises-sex">
+
+      <div class="exercise-card" data-day="sex">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Puxada Frontal na Polia</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge" style="background:rgba(255,107,129,0.12);color:#ff6b81">4×10–12</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">4</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">10–12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">90s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Puxe até a parte alta do peito. Não jogue o tronco para trás — o movimento é dos cotovelos para baixo.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="sex">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Remada Baixa na Polia (triângulo)</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge" style="background:rgba(255,107,129,0.12);color:#ff6b81">3×10–12</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">10–12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">90s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Puxe com os cotovelos, não com as mãos. Mantenha costas retas e volte devagar.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="sex">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Remada Máquina com Apoio no Peito</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge" style="background:rgba(255,107,129,0.12);color:#ff6b81">3×12</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">75s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Peito no apoio, sem impulso. Foque na contração das escápulas no final do movimento.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="sex">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Rosca Direta com Barra W</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge" style="background:rgba(255,107,129,0.12);color:#ff6b81">3×10–12</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">10–12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">60s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Cotovelos fixos ao lado do corpo. Sem balançar o tronco pra ganhar impulso.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="sex">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Rosca Martelo com Halteres</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge" style="background:rgba(255,107,129,0.12);color:#ff6b81">2×12</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">2</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">12</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">60s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Polegar aponta para o teto. Trabalha bíceps braquial e braquiorradial — espessura do braço.</div>
+        </div>
+      </div>
+
+      <div class="exercise-card" data-day="sex">
+        <div class="ex-header" onclick="toggleExercise(this)">
+          <div class="ex-check" onclick="checkExercise(event,this)">✓</div>
+          <div class="ex-name">Abdominal Crunch na Máquina</div>
+          <div class="ex-meta" style="padding:0"><span class="ex-badge" style="background:rgba(255,107,129,0.12);color:#ff6b81">3×15</span></div>
+          <div class="ex-expand">▾</div>
+        </div>
+        <div class="ex-body">
+          <div class="ex-stats">
+            <div class="ex-stat"><div class="val">3</div><div class="lbl">Séries</div></div>
+            <div class="ex-stat"><div class="val">15</div><div class="lbl">Reps</div></div>
+            <div class="ex-stat"><div class="val">60s</div><div class="lbl">Descanso</div></div>
+          </div>
+          <div class="ex-tip">🎯 Contraia o abdômen antes de mover. Expire na contração, inspire na volta.</div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /panel-sex -->
+
+  <!-- TIMER -->
+  <p class="sec-title">Timer de Descanso</p>
+  <div class="timer-section">
+    <div class="timer-label">Tempo restante</div>
+    <div id="timer-display">—</div>
+    <div class="timer-progress"><div class="timer-bar" id="timer-bar"></div></div>
+    <div class="timer-btns">
+      <button class="timer-btn" onclick="startTimer(60)">60s</button>
+      <button class="timer-btn" onclick="startTimer(75)">75s</button>
+      <button class="timer-btn" onclick="startTimer(90)">90s</button>
+      <button class="timer-btn" onclick="startTimer(120)">2min</button>
+    </div>
+  </div>
+
+  <!-- PERIODIZAÇÃO -->
+  <p class="sec-title">Periodização — 12 Semanas</p>
+  <div class="card">
+    <div class="week-phases">
+      <div class="phase-row">
+        <div class="phase-num phase-1">1</div>
+        <div class="phase-text">
+          <div class="pt">Semanas 1–4 · Adaptação</div>
+          <div class="ps">Foco em técnica e postura. Esforço RIR 3 — sem apressar carga.</div>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num phase-2">2</div>
+        <div class="phase-text">
+          <div class="pt">Semanas 5–8 · Progressão</div>
+          <div class="ps">Aumento gradual de carga. RIR 2–3. Controle cada rep.</div>
+        </div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num phase-3">3</div>
+        <div class="phase-text">
+          <div class="pt">Semanas 9–12 · Consolidação</div>
+          <div class="ps">Força e hipertrofia iniciais. RIR 2. Reavaliar após ciclo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESSÃO -->
+  <p class="sec-title">Como Progredir</p>
+  <div class="card">
+    <details class="details-wrap" open>
+      <summary>Progressão dupla simples</summary>
+      <div>
+        <ul style="margin-top:8px">
+          <li>Comece com carga que permita <strong>10 reps</strong> limpas.</li>
+          <li>Tente aumentar as reps nas semanas seguintes.</li>
+          <li>Quando atingir <strong>12 reps em todas as séries com RIR 2–3</strong>, aumente a carga.</li>
+          <li>Aumente <strong>1–2 kg</strong> em halteres ou <strong>5–10%</strong> em máquinas.</li>
+          <li>Volte para 10 reps e repita o ciclo.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="details-wrap">
+      <summary>Exemplo prático</summary>
+      <div>
+        <table style="margin-top:8px">
+          <tr><th>Semana</th><th>Carga</th><th>Resultado</th><th>Ação</th></tr>
+          <tr><td>1</td><td>30 kg</td><td>10/10/9</td><td>Manter</td></tr>
+          <tr><td>2</td><td>30 kg</td><td>11/10/10</td><td>Manter</td></tr>
+          <tr><td>3</td><td>30 kg</td><td>12/12/12</td><td>Aumentar carga</td></tr>
+          <tr><td>4</td><td>35 kg</td><td>10/10/9</td><td>Recomeçar</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <!-- AQUECIMENTO -->
+  <p class="sec-title">Aquecimento</p>
+  <div class="card">
+    <details class="details-wrap" open>
+      <summary>Mobilidade articular — 5 min</summary>
+      <div>
+        <ul style="margin-top:6px">
+          <li>Rotação de ombros: 15× frente + 15× trás</li>
+          <li>Rotação de quadril: 10× por lado</li>
+          <li>Agachamento livre sem peso: 2×10</li>
+          <li>Mobilidade de tornozelo na parede: 10× por lado</li>
+          <li>Retração de escápulas: 15 reps</li>
+        </ul>
+      </div>
+    </details>
+    <details class="details-wrap">
+      <summary>Séries de aquecimento com carga</summary>
+      <div>
+        <ul style="margin-top:6px">
+          <li>1ª série: 12 reps com carga muito leve</li>
+          <li>2ª série: 8 reps com carga moderada</li>
+          <li>Depois iniciar as séries válidas do treino</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <!-- CHECKLIST -->
+  <p class="sec-title">Checklist do Treino</p>
+  <div class="card">
+    <label class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"> Fiz mobilidade articular</label>
+    <label class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"> Fiz séries de aquecimento</label>
+    <label class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"> Mantive RIR 2–3 (não fui à falha)</label>
+    <label class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"> Controlei a descida do peso</label>
+    <label class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"> Anotei cargas e repetições</label>
+    <label class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox"> Descansei entre 60–120 segundos</label>
+  </div>
+
+  <!-- AVISOS -->
+  <p class="sec-title">Segurança</p>
+  <div class="card card-accent-red">
+    <p style="font-weight:600;margin-bottom:10px;color:#ff4757">⚠️ Pare o exercício imediatamente se:</p>
     <ul>
-      <li><strong>Não treinar até a falha.</strong></li>
-      <li><strong>Não usar drop-set, bi-set ou rest-pause.</strong></li>
-      <li><strong>Controlar a descida do peso.</strong></li>
-      <li><strong>Priorizar amplitude segura e técnica limpa.</strong></li>
-      <li><strong>Anotar cargas e repetições.</strong></li>
+      <li>Dor articular aguda</li>
+      <li>Dor na lombar fora do normal</li>
+      <li>Tontura ou falta de ar</li>
+      <li>Formigamento ou dor irradiando</li>
+      <li>Perda total de controle do movimento</li>
     </ul>
-  </section>
-
-</div>
-
-<div id="floating-timer" class="floating-timer">
-  <div>
-    <span style="display:block; font-size:12px; color:var(--muted); margin-bottom:2px;">Descanso:</span>
-    <div id="timer-display" class="timer-text">00:00</div>
+    <p style="margin-top:12px;font-size:13px;color:var(--muted)">Pare e peça ajuda ao professor da academia.</p>
   </div>
-  <div class="timer-controls">
-    <button onclick="stopTimer()" style="background:var(--danger); border-color:var(--danger);">Cancelar</button>
-  </div>
-</div>
 
-<div class="fixed-nav">
-  <button onclick="showTab('segunda')" id="btn-nav-segunda" class="active">Segunda</button>
-  <button onclick="showTab('quarta')" id="btn-nav-quarta">Quarta</button>
-  <button onclick="showTab('sexta')" id="btn-nav-sexta">Sexta</button>
+</div><!-- /wrap -->
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-btn active-seg" id="nav-seg" onclick="switchDay('seg')">💪 Segunda</button>
+  <button class="nav-btn" id="nav-qua" onclick="switchDay('qua')">🦵 Quarta</button>
+  <button class="nav-btn" id="nav-sex" onclick="switchDay('sex')">🔝 Sexta</button>
 </div>
 
 <script>
-  // Controle de Abas
-  function showTab(tabName) {
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => tab.classList.remove('active'));
+  let currentDay = 'seg';
+  let timerInterval = null;
+  let timerTotal = 0;
+  let timerRemaining = 0;
 
-    // Remove active de todos os botões
-    ['segunda', 'quarta', 'sexta'].forEach(dia => {
-      document.getElementById('btn-top-' + dia).classList.remove('active');
-      document.getElementById('btn-nav-' + dia).classList.remove('active');
+  const totalExercises = { seg: 5, qua: 6, sex: 6 };
+
+  function switchDay(day) {
+    // panels
+    document.querySelectorAll('.workout-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + day).classList.add('active');
+
+    // day tabs
+    document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('.day-tab.' + day).classList.add('active');
+
+    // nav btns
+    ['seg','qua','sex'].forEach(d => {
+      const btn = document.getElementById('nav-' + d);
+      btn.className = 'nav-btn';
+      if (d === day) btn.classList.add('active-' + d);
     });
 
-    // Ativa a aba e os respectivos botões
-    document.getElementById(tabName).classList.add('active');
-    document.getElementById('btn-top-' + tabName).classList.add('active');
-    document.getElementById('btn-nav-' + tabName).classList.add('active');
-
+    currentDay = day;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Riscar Exercício Concluído
-  function toggleDone(checkbox) {
-    const exerciseDetails = checkbox.closest('.exercise');
-    if (checkbox.checked) {
-      exerciseDetails.classList.add('done');
-      exerciseDetails.removeAttribute('open'); // Opcional: fecha a aba automaticamente
-    } else {
-      exerciseDetails.classList.remove('done');
-    }
+  function toggleExercise(header) {
+    const card = header.closest('.exercise-card');
+    card.classList.toggle('open');
   }
 
-  // Sistema de Cronômetro Flutuante
-  let countdown;
-  
-  function playBeep() {
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, ctx.currentTime); // Tom
-      gain.gain.setValueAtTime(0.1, ctx.currentTime); // Volume baixo
-      osc.start();
-      osc.stop(ctx.currentTime + 0.5); // Duração de meio segundo
-    } catch (e) {
-      console.log("Áudio não suportado.");
-    }
+  function checkExercise(event, checkEl) {
+    event.stopPropagation();
+    const card = checkEl.closest('.exercise-card');
+    card.classList.toggle('checked');
+    updateProgress(card.dataset.day);
+    // auto-close when checked
+    if (card.classList.contains('checked')) card.classList.remove('open');
   }
 
-  function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  function updateProgress(day) {
+    const cards = document.querySelectorAll(`.exercise-card[data-day="${day}"]`);
+    const done  = document.querySelectorAll(`.exercise-card[data-day="${day}"].checked`).length;
+    const total = cards.length;
+    const pct   = (done / total) * 100;
+
+    document.getElementById('prog-' + day).textContent = `${done} / ${total}`;
+    document.getElementById('bar-' + day).style.width = pct + '%';
   }
 
+  function toggleCheck(label) {
+    setTimeout(() => {
+      label.classList.toggle('done-item', label.querySelector('input').checked);
+    }, 10);
+  }
+
+  // ── TIMER ──
   function startTimer(seconds) {
-    clearInterval(countdown);
-    const floatingTimer = document.getElementById('floating-timer');
-    const timerDisplay = document.getElementById('timer-display');
-    
-    floatingTimer.style.display = 'flex';
-    timerDisplay.style.color = "var(--accent)";
-    
-    let time = seconds;
-    timerDisplay.textContent = formatTime(time);
+    clearInterval(timerInterval);
+    timerTotal     = seconds;
+    timerRemaining = seconds;
 
-    countdown = setInterval(() => {
-      time--;
-      timerDisplay.textContent = formatTime(time);
+    const display = document.getElementById('timer-display');
+    const bar     = document.getElementById('timer-bar');
 
-      if (time <= 0) {
-        clearInterval(countdown);
-        playBeep();
-        timerDisplay.textContent = "VAI!";
-        timerDisplay.style.color = "white";
-        
-        // Esconde o cronômetro automaticamente após 4 segundos do fim
-        setTimeout(() => {
-          floatingTimer.style.display = 'none';
-        }, 4000);
+    // reset classes
+    display.classList.remove('urgent', 'done');
+    bar.classList.remove('urgent');
+    bar.style.transition = 'none';
+    bar.style.width = '100%';
+
+    // highlight active btn
+    document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('running'));
+    event.target.classList.add('running');
+
+    function tick() {
+      if (timerRemaining <= 0) {
+        clearInterval(timerInterval);
+        display.textContent = '✓ IR';
+        display.classList.remove('urgent');
+        display.classList.add('done');
+        bar.style.width = '0%';
+        document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('running'));
+        return;
       }
-    }, 1000);
-  }
 
-  function stopTimer() {
-    clearInterval(countdown);
-    document.getElementById('floating-timer').style.display = 'none';
+      display.textContent = timerRemaining;
+      const pct = (timerRemaining / timerTotal) * 100;
+      bar.style.transition = 'width 1s linear';
+      bar.style.width = pct + '%';
+
+      if (timerRemaining <= 10) {
+        display.classList.add('urgent');
+        bar.classList.add('urgent');
+      }
+
+      timerRemaining--;
+    }
+
+    tick();
+    timerInterval = setInterval(tick, 1000);
   }
 </script>
-
 </body>
 </html>

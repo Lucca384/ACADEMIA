@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treino Hipertrofia Iniciante - 3x Semana</title>
+
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #181b22;
+      --card2: #20242d;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --accent: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --border: #2f3542;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    header {
+      padding: 24px 16px;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 28px;
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+    }
+
+    h3 {
+      margin-top: 18px;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .info {
+      background: var(--card2);
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #064e3b;
+      color: #bbf7d0;
+      font-size: 12px;
+      margin: 3px;
+    }
+
+    .warning {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--warning);
+      color: #fde68a;
+    }
+
+    .danger {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--danger);
+      color: #fecaca;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin: 6px 0;
+      background: var(--card2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button.active {
+      background: var(--accent);
+      color: #052e16;
+      font-weight: bold;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    details {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      overflow-x: auto;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--card2);
+      color: var(--accent);
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.3);
+      margin-right: 8px;
+    }
+
+    .exercise {
+      border-left: 4px solid var(--accent);
+    }
+
+    .small {
+      font-size: 14px;
+    }
+
+    .fixed-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #09090b;
+      border-top: 1px solid var(--border);
+      padding: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .fixed-nav button {
+      font-size: 13px;
+      padding: 10px;
+      margin: 0;
+    }
+
+    .done {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+
+    .timer-box {
+      text-align: center;
+      background: var(--card2);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    #timer {
+      font-size: 42px;
+      font-weight: bold;
+      color: var(--accent);
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Programa de Hipertrofia Máxima — Iniciante</h1>
+  <p class="muted">
+    Homem, 16 anos, 60 kg, 1,80 m, academia completa, 3x por semana: segunda, quarta e sexta.
+  </p>
+  <span class="badge">Objetivo: Ganho de Massa</span>
+  <span class="badge">Sem Cardio</span>
+  <span class="badge">Full Body</span>
+  <span class="badge">RIR 2–3</span>
+</header>
+
+<div class="container">
+
+  <section class="card warning">
+    <h2>Antes de começar</h2>
+    <p>
+      Como você tem 16 anos e é iniciante, o foco é aprender a executar os movimentos com técnica perfeita,
+      sem buscar cargas máximas. Treine com supervisão sempre que possível.
+    </p>
+    <p>
+      <strong>Regra principal:</strong> nenhuma série deve ir até a falha. Termine cada série sentindo que ainda conseguiria fazer
+      <strong>2 a 3 repetições boas</strong>.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Estrutura do Programa</h2>
+
+    <div class="grid">
+      <div class="info">
+        <strong>Divisão:</strong><br>
+        Full Body A / B / C
+      </div>
+
+      <div class="info">
+        <strong>Dias:</strong><br>
+        Segunda, quarta e sexta
+      </div>
+
+      <div class="info">
+        <strong>Duração:</strong><br>
+        Até 60 minutos
+      </div>
+
+      <div class="info">
+        <strong>Foco:</strong><br>
+        Hipertrofia + adaptação anatômica
+      </div>
+    </div>
+
+    <p>
+      A divisão <strong>Full Body</strong> é ideal para iniciantes porque trabalha o corpo inteiro 3 vezes por semana,
+      melhora o aprendizado motor e permite evoluir nos exercícios básicos sem excesso de volume.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Periodização — 12 Semanas</h2>
+
+    <table>
+      <tr>
+        <th>Fase</th>
+        <th>Semanas</th>
+        <th>Objetivo</th>
+        <th>Esforço</th>
+      </tr>
+      <tr>
+        <td>Fase 1</td>
+        <td>1 a 4</td>
+        <td>Aprender técnica, postura e amplitude</td>
+        <td>RIR 3</td>
+      </tr>
+      <tr>
+        <td>Fase 2</td>
+        <td>5 a 8</td>
+        <td>Aumentar controle e carga gradualmente</td>
+        <td>RIR 2–3</td>
+      </tr>
+      <tr>
+        <td>Fase 3</td>
+        <td>9 a 12</td>
+        <td>Consolidar força e hipertrofia inicial</td>
+        <td>RIR 2</td>
+      </tr>
+    </table>
+
+    <p>
+      Após 12 semanas, o ideal é reavaliar cargas, técnica, medidas corporais e possivelmente migrar para uma divisão
+      Upper/Lower ou ABC.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Aquecimento Específico — Sem Cardio</h2>
+
+    <details open>
+      <summary>Rotina rápida de mobilidade — 5 minutos</summary>
+      <ul>
+        <li>Rotação de ombros: 15 para frente + 15 para trás</li>
+        <li>Rotação de quadril: 10 para cada lado</li>
+        <li>Agachamento livre sem peso: 2 séries de 10 reps</li>
+        <li>Mobilidade de tornozelo na parede: 10 reps por lado</li>
+        <li>Elevação escapular/retração das escápulas: 15 reps</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Séries de aquecimento com carga leve</summary>
+      <p>
+        Antes do primeiro exercício principal do dia, faça:
+      </p>
+      <ul>
+        <li>1ª série: 12 reps com carga muito leve</li>
+        <li>2ª série: 8 reps com carga leve/moderada</li>
+        <li>Depois comece as séries válidas do treino</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>Escolha o treino do dia</h2>
+
+    <button onclick="showTab('segunda')" id="btn-segunda" class="active">Segunda — Full Body A</button>
+    <button onclick="showTab('quarta')" id="btn-quarta">Quarta — Full Body B</button>
+    <button onclick="showTab('sexta')" id="btn-sexta">Sexta — Full Body C</button>
+  </section>
+
+  <!-- SEGUNDA -->
+  <section id="segunda" class="tab-content active card">
+    <h2>Segunda — Full Body A</h2>
+
+    <ExerciseList>
+      <details class="exercise" open>
+        <summary><input type="checkbox" onchange="toggleDone(this)"> Leg Press 45°</summary>
+        <p><strong>Séries:</strong> 3</p>
+        <p><strong>Reps:</strong> 10–12</p>
+        <p><strong>Descanso:</strong> 90 segundos</p>
+        <p><strong>Cadência:</strong> 3s descendo / 1s subindo</p>
+        <p><strong>RIR:</strong> 2–3</p>
+        <p><strong>Dica:</strong> pés na largura dos ombros, desça controlando e não tire o quadril do banco.</p>
+      </details>
+
+      <details class="exercise">
+        <summary><input type="checkbox" onchange="toggleDone(this)"> Supino Máquina</summary>
+        <p><strong>Séries:</strong> 3</p>
+        <p><strong>Reps:</strong> 10–12</p>
+        <p><strong>Descanso:</strong> 90 segundos</p>
+        <p><strong>Cadência:</strong> 2–3s descendo / 1s subindo</p>
+        <p><strong>RIR:</strong> 2–3</p>
+        <p><strong>Dica:</strong> mantenha escápulas levemente encaixadas e não deixe os ombros subirem.</p>
+      </details>
+
+      <details class="exercise">
+        <summary><input type="checkbox" onchange="toggleDone(this)"> Puxada Frontal na Polia</summary>
+        <p><strong>Séries:</strong> 3</p>
+        <p><strong>Reps:</strong> 10–12</p>
+        <p><strong>Descanso:</strong> 90 segundos</p>
+        <p><strong>Cadência:</strong> 2s puxando / 3s voltando</p>
+        <p><strong>RIR:</strong> 2–3</p>
+        <p><strong>Dica:</strong> puxe a barra até a parte alta do peito, sem jogar o tronco para trás.</p>
+      </details>
+
+      <details class="exercise">
+        <summary><input type="checkbox" onchange="toggleDone(this)"> Cadeira Flexora</summary>
+        <p><strong>Séries:</strong> 2</p>
+        <p><strong>Reps:</strong> 12–15</p>
+        <p><strong>Descanso:</strong> 60–75 segundos</p>
+        <p><strong>Cadência:</strong> 2s contraindo / 3s voltando</p>
+        <p><strong>RIR:</strong> 2–3</p>
+      </details>
+
+      <details class="exercise">
+        <summary><input type="checkbox" onchange="toggleDone(this)"> Elevação Lateral com Halteres</summary>
+        <p><strong>Séries:</strong> 2</p>
+        <p><strong>Reps:</strong> 12–15</p>
+        <p><strong>Descanso:</strong> 60 segundos</p>
+        <p><strong>Cadência:</strong> controlada, sem balanço</p>
+        <p><strong>RIR:</strong> 2–3</p>
+      </details>
+
+      <details class="exercise">
+        <summary><input type="checkbox" onchange="toggleDone(this)"> Prancha Abdominal</summary>
+        <p><strong>Séries:</strong> 2</p>
+        <p><strong>Tempo:</strong> 20–40 segundos</p>
+        <p><strong>Descanso:</strong> 60 segundos</p>
+        <p><strong>Dica:</strong> mantenha abdômen contraído e lombar neutra.</p>
+      </details>
+    </ExerciseList>
+  </section>
+
+  <!-- QUARTA -->
+  <section id="quarta" class="tab-content card">
+    <h2>Quarta — Full Body B</h2>
+
+    <details class="exercise" open>
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Agachamento Goblet com Halter</summary>
+      <p><strong>Séries:</strong> 3</p>
+      <p><strong>Reps:</strong> 10–12</p>
+      <p><strong>Descanso:</strong> 90 segundos</p>
+      <p><strong>Cadência:</strong> 3s descendo / 1s subindo</p>
+      <p><strong>RIR:</strong> 2–3</p>
+      <p><strong>Dica:</strong> segure o halter no peito, desça com controle e mantenha o tronco firme.</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Remada Baixa Máquina ou Polia</summary>
+      <p><strong>Séries:</strong> 3</p>
+      <p><strong>Reps:</strong> 10–12</p>
+      <p><strong>Descanso:</strong> 90 segundos</p>
+      <p><strong>Cadência:</strong> 2s puxando / 3s voltando</p>
+      <p><strong>RIR:</strong> 2–3</p>
+      <p><strong>Dica:</strong> puxe com os cotovelos, não com as mãos.</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Desenvolvimento de Ombros Máquina</summary>
+      <p><strong>Séries:</strong> 3</p>
+      <p><strong>Reps:</strong> 10–12</p>
+      <p><strong>Descanso:</strong> 90 segundos</p>
+      <p><strong>Cadência:</strong> 2s subindo / 3s descendo</p>
+      <p><strong>RIR:</strong> 2–3</p>
+      <p><strong>Dica:</strong> não trave os cotovelos no topo.</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Cadeira Extensora</summary>
+      <p><strong>Séries:</strong> 2</p>
+      <p><strong>Reps:</strong> 12–15</p>
+      <p><strong>Descanso:</strong> 60–75 segundos</p>
+      <p><strong>Cadência:</strong> 2s subindo / 3s descendo</p>
+      <p><strong>RIR:</strong> 2–3</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Rosca Direta com Barra W</summary>
+      <p><strong>Séries:</strong> 2</p>
+      <p><strong>Reps:</strong> 10–12</p>
+      <p><strong>Descanso:</strong> 60 segundos</p>
+      <p><strong>Cadência:</strong> 2s subindo / 3s descendo</p>
+      <p><strong>RIR:</strong> 2–3</p>
+      <p><strong>Dica:</strong> cotovelos parados, sem balançar o corpo.</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Abdominal Máquina ou Crunch no Solo</summary>
+      <p><strong>Séries:</strong> 2</p>
+      <p><strong>Reps:</strong> 12–15</p>
+      <p><strong>Descanso:</strong> 60 segundos</p>
+      <p><strong>RIR:</strong> 2–3</p>
+    </details>
+  </section>
+
+  <!-- SEXTA -->
+  <section id="sexta" class="tab-content card">
+    <h2>Sexta — Full Body C</h2>
+
+    <details class="exercise" open>
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Hack Machine ou Agachamento no Smith</summary>
+      <p><strong>Séries:</strong> 3</p>
+      <p><strong>Reps:</strong> 10–12</p>
+      <p><strong>Descanso:</strong> 90 segundos</p>
+      <p><strong>Cadência:</strong> 3s descendo / 1s subindo</p>
+      <p><strong>RIR:</strong> 2–3</p>
+      <p><strong>Dica:</strong> escolha o aparelho em que você se sentir mais estável.</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Supino Inclinado com Halteres</summary>
+      <p><strong>Séries:</strong> 3</p>
+      <p><strong>Reps:</strong> 10–12</p>
+      <p><strong>Descanso:</strong> 90 segundos</p>
+      <p><strong>Cadência:</strong> 3s descendo / 1s subindo</p>
+      <p><strong>RIR:</strong> 2–3</p>
+      <p><strong>Dica:</strong> use carga leve no começo para aprender a controlar os halteres.</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Remada Máquina com Apoio no Peito</summary>
+      <p><strong>Séries:</strong> 3</p>
+      <p><strong>Reps:</strong> 10–12</p>
+      <p><strong>Descanso:</strong> 90 segundos</p>
+      <p><strong>Cadência:</strong> 2s puxando / 3s voltando</p>
+      <p><strong>RIR:</strong> 2–3</p>
+      <p><strong>Dica:</strong> mantenha o peito apoiado e evite puxar com impulso.</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Mesa Flexora ou Cadeira Flexora</summary>
+      <p><strong>Séries:</strong> 2</p>
+      <p><strong>Reps:</strong> 12–15</p>
+      <p><strong>Descanso:</strong> 60–75 segundos</p>
+      <p><strong>Cadência:</strong> 2s contraindo / 3s voltando</p>
+      <p><strong>RIR:</strong> 2–3</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Tríceps na Polia com Corda</summary>
+      <p><strong>Séries:</strong> 2</p>
+      <p><strong>Reps:</strong> 10–12</p>
+      <p><strong>Descanso:</strong> 60 segundos</p>
+      <p><strong>Cadência:</strong> 2s descendo / 3s subindo</p>
+      <p><strong>RIR:</strong> 2–3</p>
+      <p><strong>Dica:</strong> cotovelos fixos ao lado do corpo.</p>
+    </details>
+
+    <details class="exercise">
+      <summary><input type="checkbox" onchange="toggleDone(this)"> Panturrilha Sentado ou em Pé</summary>
+      <p><strong>Séries:</strong> 2</p>
+      <p><strong>Reps:</strong> 12–15</p>
+      <p><strong>Descanso:</strong> 60 segundos</p>
+      <p><strong>Cadência:</strong> 2s subindo / 3s descendo</p>
+      <p><strong>Dica:</strong> faça amplitude completa, sem quicar.</p>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>Timer de Descanso</h2>
+
+    <div class="timer-box">
+      <div id="timer">90</div>
+      <button onclick="startTimer(60)">Descanso 60s</button>
+      <button onclick="startTimer(75)">Descanso 75s</button>
+      <button onclick="startTimer(90)">Descanso 90s</button>
+      <button onclick="startTimer(120)">Descanso 120s</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Como escolher a carga</h2>
+
+    <p>
+      Escolha uma carga com a qual você consiga fazer todas as repetições com técnica boa,
+      terminando a série com <strong>2 a 3 repetições na reserva</strong>.
+    </p>
+
+    <div class="grid">
+      <div class="info">
+        <strong>Carga leve demais:</strong><br>
+        Você termina e sente que faria mais de 5 reps.
+      </div>
+
+      <div class="info">
+        <strong>Carga ideal:</strong><br>
+        Você termina e sente que faria só mais 2 ou 3 reps.
+      </div>
+
+      <div class="info">
+        <strong>Carga pesada demais:</strong><br>
+        Você rouba, perde postura ou falha antes do alvo.
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Método de Progressão</h2>
+
+    <details open>
+      <summary>Progressão dupla simples</summary>
+      <p>
+        Use a faixa de repetições indicada. Exemplo: <strong>10–12 reps</strong>.
+      </p>
+
+      <ol>
+        <li>Comece com uma carga que permita 10 reps com técnica boa.</li>
+        <li>Tente aumentar repetições nas semanas seguintes.</li>
+        <li>Quando conseguir fazer 12 reps em todas as séries com RIR 2–3, aumente a carga.</li>
+        <li>Aumente pouco: 1 a 2 kg em halteres ou 5 a 10% em máquinas.</li>
+        <li>Depois volte para 10 reps e repita o processo.</li>
+      </ol>
+    </details>
+
+    <details>
+      <summary>Exemplo prático</summary>
+      <table>
+        <tr>
+          <th>Semana</th>
+          <th>Carga</th>
+          <th>Resultado</th>
+          <th>O que fazer</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>30 kg</td>
+          <td>10 / 10 / 9 reps</td>
+          <td>Manter carga</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>30 kg</td>
+          <td>11 / 10 / 10 reps</td>
+          <td>Manter carga</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>30 kg</td>
+          <td>12 / 12 / 12 reps</td>
+          <td>Aumentar carga</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>35 kg</td>
+          <td>10 / 10 / 9 reps</td>
+          <td>Recomeçar progressão</td>
+        </tr>
+      </table>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>Regras de Execução</h2>
+
+    <ul>
+      <li><strong>Não treinar até a falha.</strong></li>
+      <li><strong>Não usar drop-set, bi-set, rest-pause ou técnicas avançadas.</strong></li>
+      <li><strong>Controlar a descida do peso.</strong></li>
+      <li><strong>Priorizar amplitude segura e técnica limpa.</strong></li>
+      <li><strong>Descansar exatamente entre 60 e 120 segundos.</strong></li>
+      <li><strong>Anotar cargas e repetições.</strong></li>
+    </ul>
+  </section>
+
+  <section class="card danger">
+    <h2>Sinais para parar o exercício</h2>
+
+    <ul>
+      <li>Dor articular aguda</li>
+      <li>Dor na lombar fora do normal</li>
+      <li>Tontura</li>
+      <li>Perda total de controle do movimento</li>
+      <li>Formigamento ou dor irradiando</li>
+    </ul>
+
+    <p>
+      Se acontecer, pare o exercício e peça ajuda ao professor da academia.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Checklist de cada treino</h2>
+
+    <label><input type="checkbox"> Fiz mobilidade articular</label><br><br>
+    <label><input type="checkbox"> Fiz séries de aquecimento</label><br><br>
+    <label><input type="checkbox"> Mantive RIR 2–3</label><br><br>
+    <label><input type="checkbox"> Controlei a descida do peso</label><br><br>
+    <label><input type="checkbox"> Anotei cargas e repetições</label><br><br>
+    <label><input type="checkbox"> Não fiz cardio</label>
+  </section>
+
+</div>
+
+<div class="fixed-nav">
+  <button onclick="showTab('segunda')">Segunda</button>
+  <button onclick="showTab('quarta')">Quarta</button>
+  <button onclick="showTab('sexta')">Sexta</button>
+</div>
+
+<script>
+  function showTab(tabName) {
+    const tabs = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('button');
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+
+    document.getElementById(tabName).classList.add('active');
+
+    document.getElementById('btn-segunda').classList.remove('active');
+    document.getElementById('btn-quarta').classList.remove('active');
+    document.getElementById('btn-sexta').classList.remove('active');
+
+    const btn = document.getElementById('btn-' + tabName);
+    if (btn) btn.classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleDone(checkbox) {
+    const summary = checkbox.parentElement;
+    if (checkbox.checked) {
+      summary.classList.add('done');
+    } else {
+      summary.classList.remove('done');
+    }
+  }
+
+  let countdown;
+
+  function startTimer(seconds) {
+    clearInterval(countdown);
+
+    let time = seconds;
+    const timer = document.getElementById('timer');
+    timer.textContent = time;
+
+    countdown = setInterval(() => {
+      time--;
+      timer.textContent = time;
+
+      if (time <= 0) {
+        clearInterval(countdown);
+        timer.textContent = "OK";
+        alert("Descanso finalizado. Próxima série.");
+      }
+    }, 1000);
+  }
+</script>
+
+</body>
+</html>
